@@ -60,6 +60,18 @@ local source = string.sub(debug.getinfo(1,'S').source, 2)
 local path = string.sub(source, 1, string.find(source, "/[^/]*$"))
 local noicon = path .. "noicon.png"
 
+local function clientOpacity(altTabTable, altTabIndex)
+   if not settings.client_opacity then return end
+
+   for i,c in pairs(altTabTable) do
+      if i == altTabIndex then
+         c.opacity = 1
+      elseif applyOpacity then
+         c.opacity = settings.client_opacity_value
+      end
+   end
+end
+
 local function cycle(altTabTable, altTabIndex, dir)
    -- Switch to next client
    altTabIndex = altTabIndex + dir
@@ -285,20 +297,7 @@ local function preview()
    preview_wbox:set_widget(preview_layout)
 end
 
-local function clientOpacity(altTabTable, altTabIndex)
-   if not settings.client_opacity then return end
-
-   for i,c in pairs(altTabTable) do
-      if i == altTabIndex then
-	 c.opacity = 1
-      elseif applyOpacity then
-	 c.opacity = settings.client_opacity_value
-      end
-   end
-end
-
 local function switch(dir, alt, tab, shift_tab)
-
    altTabTable = {}
    local altTabMinimized = {}
    local altTabOpacity = {}
