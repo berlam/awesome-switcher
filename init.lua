@@ -471,7 +471,7 @@ function _M.switch(dir, mod_key1, release_key, mod_key2, key_switch)
 		function (mod, key, event)
 			-- Stop alt-tabbing when the alt-key is released
 			if gears.table.hasitem(mod, mod_key1) then
-				if (#mod == 1 and key == release_key) or key == "Escape" and event == "release" then
+				if (key == release_key or key == "Escape") and event == "release" then
 					if _M.preview_wbox.visible == true then
 						_M.preview_wbox.visible = false
 						_M.preview_live_timer:stop()
