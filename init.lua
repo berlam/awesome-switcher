@@ -171,16 +171,16 @@ function _M.createPreviewText(client)
 end
 
 -- Preview is created here.
-function _M.clientOpacity(altTabTable, altTabIndex)
+function _M.clientOpacity()
 	if not _M.settings.client_opacity then return end
 
 	local opacity = _M.settings.client_opacity_value
 	if opacity > 1 then opacity = 1 end
-	for i,data in pairs(altTabTable) do
+	for i,data in pairs(_M.altTabTable) do
 		data.client.opacity = opacity
 	end
 
-	if client.focus == altTabTable[altTabIndex].client then
+	if client.focus == _M.altTabTable[_M.altTabIndex].client then
 		-- Let's normalize the value up to 1.
 		local opacityFocusSelected = _M.settings.client_opacity_value_selected + _M.settings.client_opacity_value_in_focus
 		if opacityFocusSelected > 1 then opacityFocusSelected = 1 end
@@ -193,7 +193,7 @@ function _M.clientOpacity(altTabTable, altTabIndex)
 		if opacitySelected > 1 then opacitySelected = 1 end
 
 		client.focus.opacity = opacityFocus
-		altTabTable[altTabIndex].client.opacity = opacitySelected
+		_M.altTabTable[_M.altTabIndex].client.opacity = opacitySelected
 	end
 end
 
