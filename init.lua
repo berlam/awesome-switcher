@@ -498,7 +498,9 @@ function _M.switch(dir, mod_key1, release_key, mod_key2, key_switch)
 						-- raise chosen client on top of all
 						c = _M.altTabTable[_M.altTabIndex].client
 						c:raise()
+						c.first_tag:view_only()
 						client.focus = c
+
 
 						-- restore minimized clients
 						for i = 1, #_M.altTabTable do
